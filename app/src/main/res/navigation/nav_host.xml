@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_host"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/splashFragment"
         android:name="uz.itschool.handybook.fragments.SplashFragment"
@@ -11,11 +11,27 @@
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_mainFragment2"
-            app:destination="@id/mainFragment2" />
+            app:destination="@id/mainFragment2"
+            app:popUpTo="@id/nav_host" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment2"
         android:name="uz.itschool.handybook.fragments.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="uz.itschool.handybook.fragments.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="uz.itschool.handybook.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="uz.itschool.handybook.fragments.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" />
 </navigation>

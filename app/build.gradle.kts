@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "uz.itschool.handybook"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "uz.itschool.handybook"

@@ -5,18 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import uz.itschool.handybook.databinding.FragmentSplashBinding
+import uz.itschool.handybook.databinding.FragmentWelcomeBinding
 
-class SplashFragment : Fragment() {
-    private lateinit var binding : FragmentSplashBinding
-
+class WelcomeFragment : Fragment() {
+    private lateinit var binding: FragmentWelcomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSplashBinding.inflate(inflater, container, false)
-
+        binding = FragmentWelcomeBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 }

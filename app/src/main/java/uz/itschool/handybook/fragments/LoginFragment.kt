@@ -1,22 +1,20 @@
 package uz.itschool.handybook.fragments
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import uz.itschool.handybook.databinding.FragmentSplashBinding
+import uz.itschool.handybook.R
+import uz.itschool.handybook.databinding.FragmentLoginBinding
 
-class SplashFragment : Fragment() {
-    private lateinit var binding : FragmentSplashBinding
-
+class LoginFragment : Fragment() {
+    private lateinit var binding: FragmentLoginBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSplashBinding.inflate(inflater, container, false)
-
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 }

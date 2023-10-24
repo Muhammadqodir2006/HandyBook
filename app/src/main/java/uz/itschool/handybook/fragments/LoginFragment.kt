@@ -1,6 +1,7 @@
 package uz.itschool.handybook.fragments
 
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View

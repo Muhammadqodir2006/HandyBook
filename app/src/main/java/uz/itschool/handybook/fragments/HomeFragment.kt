@@ -1,24 +1,30 @@
 package uz.itschool.handybook.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import uz.itschool.handybook.R
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
+import retrofit2.Call
+import retrofit2.Response
+import uz.itschool.handybook.adapter.BookAdapter
+import uz.itschool.handybook.databinding.FragmentHomeBinding
+import uz.itschool.handybook.model.Book
+import uz.itschool.handybook.networking.APIClient
+import uz.itschool.handybook.networking.APIService
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+    private lateinit var binding: FragmentHomeBinding
+    private val api = APIClient.getInstance().create(APIService::class.java)
+
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -33,21 +39,51 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.homeAllRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        setMainBook()
+        setAllRecycler()
+
+
+        return binding.root
+    }
+
+    private fun setAllRecycler() {
+        api.getBooks().enqueue(object : retrofit2.Callback<List<Book>>{
+            override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
+                val books = response.body()!!
+                binding.homeAllRecycler.adapter = BookAdapter(books, requireContext(), false)
+            }
+
+            override fun onFailure(call: Call<List<Book>>, t: Throwable) {
+                Log.d("TAG", "$t")
+            }
+
+        })
+    }
+
+    private fun setMainBook() {
+        api.getMainBook().enqueue(object : retrofit2.Callback<Book>{
+            @SuppressLint("SetTextI18n")
+            override fun onResponse(call: Call<Book>, response: Response<Book>) {
+                val mainBook = response.body()!!
+                binding.homeMainBookImage.load(mainBook.image)
+                binding.homeMainBookText.text = """${mainBook.author}ning "${mainBook.name}" asari"""
+                binding.homeMainBookReadNowMb.setOnClickListener {
+                    TODO("Set listener")
+                }
+                Log.d("TAG", "${response.body()!!}")
+            }
+            override fun onFailure(call: Call<Book>, t: Throwable) {
+                Log.d("TAG", "$t")
+            }
+
+        })
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             HomeFragment().apply {

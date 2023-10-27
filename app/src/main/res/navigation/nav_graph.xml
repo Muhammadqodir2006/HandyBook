@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_host"
-    app:startDestination="@id/welcomeFragment">
+    app:startDestination="@id/splashFragment">
     <fragment
         android:id="@+id/splashFragment"
         android:name="uz.itschool.handybook.fragments.SplashFragment"
@@ -11,11 +11,14 @@
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_mainFragment2"
-            app:destination="@id/mainFragment2"
+            app:destination="@id/mainFragment"
             app:popUpTo="@id/nav_host" />
+        <action
+            android:id="@+id/action_splashFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/mainFragment2"
+        android:id="@+id/mainFragment"
         android:name="uz.itschool.handybook.fragments.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
@@ -23,35 +26,36 @@
         android:id="@+id/welcomeFragment"
         android:name="uz.itschool.handybook.fragments.WelcomeFragment"
         android:label="fragment_welcome"
-        tools:layout="@layout/fragment_welcome" >
+        tools:layout="@layout/fragment_welcome">
         <action
             android:id="@+id/action_welcomeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_welcomeFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_signUpFragment2"
+            app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="uz.itschool.handybook.fragments.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
         <action
             android:id="@+id/action_loginFragment_to_mainFragment2"
-            app:destination="@id/mainFragment2" />
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="uz.itschool.handybook.fragments.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
+        tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_signUpFragment_to_mainFragment2"
-            app:destination="@id/mainFragment2" />
+            app:destination="@id/mainFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/bookInfoFragment"
-        android:name="uz.itschool.handybook.fragments.BookInfoFragment"
-        android:label="fragment_book_info"
-        tools:layout="@layout/fragment_book_info" />
 </navigation>

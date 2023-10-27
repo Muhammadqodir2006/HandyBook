@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import coil.load
 import retrofit2.Call
 import retrofit2.Response
@@ -41,7 +43,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.homeAllRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.homeAllRecycler.layoutManager = StaggeredGridLayoutManager(2,  StaggeredGridLayoutManager.VERTICAL)
 
         setMainBook()
         setAllRecycler()
@@ -54,7 +56,8 @@ class HomeFragment : Fragment() {
         api.getBooks().enqueue(object : retrofit2.Callback<List<Book>>{
             override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
                 val books = response.body()!!
-                binding.homeAllRecycler.adapter = BookAdapter(books, requireContext(), false)
+                binding.homeAllRecycler.adapter = BookAdapter(books, requireContext(), true)
+                Log.d("TAG", "$books")
             }
 
             override fun onFailure(call: Call<List<Book>>, t: Throwable) {
@@ -72,9 +75,8 @@ class HomeFragment : Fragment() {
                 binding.homeMainBookImage.load(mainBook.image)
                 binding.homeMainBookText.text = """${mainBook.author}ning "${mainBook.name}" asari"""
                 binding.homeMainBookReadNowMb.setOnClickListener {
-                    TODO("Set listener")
+                    // TODO Set listener
                 }
-                Log.d("TAG", "${response.body()!!}")
             }
             override fun onFailure(call: Call<Book>, t: Throwable) {
                 Log.d("TAG", "$t")

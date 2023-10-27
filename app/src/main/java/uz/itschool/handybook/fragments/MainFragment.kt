@@ -23,7 +23,19 @@ class MainFragment : Fragment() {
     }
 
     private fun setBottomNavigation() {
-        // TODO: set bottom navigation
+        binding.mainBottomNavigation.setOnItemSelectedListener {
+            when (it.itemId){
+                R.id.home_sc -> loadFragment(HomeFragment())
+                R.id.reading_sc -> loadFragment(HomeFragment())
+                R.id.bookmark_sc -> loadFragment(HomeFragment())
+                R.id.profile_sc -> loadFragment(HomeFragment())
+            }
+            true
+        }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        parentFragmentManager.beginTransaction().replace(R.id.main_fragment_container, fragment).commit()
     }
 
     private fun setFragmentView() {

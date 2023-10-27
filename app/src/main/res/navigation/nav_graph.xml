@@ -41,4 +41,9 @@
         android:name="uz.itschool.handybook.fragments.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/bookInfoFragment"
+        android:name="uz.itschool.handybook.fragments.BookInfoFragment"
+        android:label="fragment_book_info"
+        tools:layout="@layout/fragment_book_info" />
 </navigation>

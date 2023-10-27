@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_host"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/welcomeFragment">
     <fragment
         android:id="@+id/splashFragment"
         android:name="uz.itschool.handybook.fragments.SplashFragment"
@@ -35,12 +35,20 @@
         android:id="@+id/loginFragment"
         android:name="uz.itschool.handybook.fragments.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment2"
+            app:destination="@id/mainFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="uz.itschool.handybook.fragments.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_mainFragment2"
+            app:destination="@id/mainFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/bookInfoFragment"
         android:name="uz.itschool.handybook.fragments.BookInfoFragment"

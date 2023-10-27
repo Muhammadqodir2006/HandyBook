@@ -228,6 +228,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/signup_signup_mb"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginHorizontal="32dp"

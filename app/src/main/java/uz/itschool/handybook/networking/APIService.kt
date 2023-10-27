@@ -7,9 +7,9 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 import uz.itschool.handybook.model.Book
 import uz.itschool.handybook.model.Comment
-import uz.itschool.handybook.model.Login
-import uz.itschool.handybook.model.Signin
-import uz.itschool.handybook.model.UserToken
+import uz.itschool.handybook.model.SignIn
+import uz.itschool.handybook.model.SignUp
+import uz.itschool.handybook.model.User
 
 interface APIService {
     @GET("/book-api")
@@ -30,8 +30,8 @@ interface APIService {
     fun search(@Query("name") name: String):Call<List<Book>>
 
     @POST("/book-api/register")
-    fun signup(@Body login: Login): Call<UserToken>
+    fun signup(@Body signUp: SignUp): Call<User>
 
     @POST("/book-api/login")
-    fun login(@Body signin: Signin): Call<UserToken>
+    fun login(@Body signIn: SignIn): Call<User>
 }

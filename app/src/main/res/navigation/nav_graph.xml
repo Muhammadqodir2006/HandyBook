@@ -10,12 +10,13 @@
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
-            android:id="@+id/action_splashFragment_to_mainFragment2"
-            app:destination="@id/mainFragment"
+            android:id="@+id/action_splashFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment"
             app:popUpTo="@id/nav_host" />
         <action
-            android:id="@+id/action_splashFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_host" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -33,9 +34,6 @@
         <action
             android:id="@+id/action_welcomeFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_welcomeFragment_to_signUpFragment2"
-            app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -46,8 +44,9 @@
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_mainFragment2"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_host" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -55,7 +54,8 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up">
         <action
-            android:id="@+id/action_signUpFragment_to_mainFragment2"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/action_signUpFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_host" />
     </fragment>
 </navigation>

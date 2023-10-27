@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import uz.itschool.handybook.R
 import uz.itschool.handybook.databinding.FragmentSplashBinding
+import uz.itschool.housesales.preferences.SharedPrefHelper
 
 class SplashFragment : Fragment() {
     private lateinit var binding : FragmentSplashBinding
@@ -21,8 +22,10 @@ class SplashFragment : Fragment() {
         binding = FragmentSplashBinding.inflate(inflater, container, false)
 
         Handler(Looper.getMainLooper()).postDelayed({
-           findNavController().navigate(R.id.action_splashFragment_to_mainFragment2)
-        }, 500)
+            val shared = SharedPrefHelper.getInstance(requireContext())
+            if (shared.getUser() == null) findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)
+            else findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
+        }, 1000)
 
         return binding.root
     }

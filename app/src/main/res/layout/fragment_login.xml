@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/signup_back_button_iv"
+            android:id="@+id/login_back_button_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/selectableItemBackground"
@@ -55,20 +55,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Email"
+        android:text="Username"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/login_email_edit_acet"
+        app:layout_constraintStart_toStartOf="@+id/login_username_edit_acet"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/login_email_edit_acet"
+        android:id="@+id/login_username_edit_acet"
         style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="6dp"
         android:background="@drawable/edit_text_shape"
-        android:hint="abcdef@gmail.com"
+        android:hint="username"
         android:inputType="textEmailAddress"
         android:lines="1"
         android:maxLines="1"
@@ -76,15 +76,16 @@
         tools:layout_editor_absoluteX="24dp" />
 
     <TextView
-        android:id="@+id/login_email_incorrect_tv"
+        android:id="@+id/login_username_incorrect_tv"
         android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Email noto'g'ri kiritlgan"
+        android:text="Username kamida 5 ta belgidan iborat bo'lishi kerak"
         android:textColor="@color/red"
-        app:layout_constraintEnd_toEndOf="@+id/login_email_edit_acet"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/login_username_edit_acet"
         app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/login_email_edit_acet" />
+        app:layout_constraintTop_toBottomOf="@+id/login_username_edit_acet" />
 
     <TextView
         android:id="@+id/textView4"
@@ -94,7 +95,7 @@
         android:text="Parol"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/login_email_incorrect_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/login_username_incorrect_tv" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/login_forgot_password_cv"
@@ -140,10 +141,11 @@
         android:id="@+id/login_password_incorrect_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Parol noto'g'ri kiritlgan"
+        android:textSize="12sp"
+        android:text="Parol kamida 8 ta belgidan iborat bo'lishi kerak"
         android:visibility="gone"
         android:textColor="@color/red"
-        app:layout_constraintEnd_toEndOf="@+id/login_email_edit_acet"
+        app:layout_constraintEnd_toEndOf="@+id/login_username_edit_acet"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/login_password_edit_acet" />
 
@@ -157,7 +159,7 @@
         app:layout_constraintTop_toBottomOf="@+id/login_password_incorrect_tv" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/home_main_book_read_now_mb"
+        android:id="@+id/login_login_mb"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginHorizontal="32dp"

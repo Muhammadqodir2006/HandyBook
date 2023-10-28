@@ -10,16 +10,17 @@
         android:id="@+id/book_item_image_card_view"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/book_item_image_iv"
             android:layout_width="match_parent"
-            android:adjustViewBounds="true"
             android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             android:src="@drawable/book_image" />
     </androidx.cardview.widget.CardView>
 

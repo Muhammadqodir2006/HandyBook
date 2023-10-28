@@ -8,6 +8,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
+        android:visibility="invisible"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -34,13 +35,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bosh sahifa"
+        android:layout_marginStart="16dp"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/materialCardView" />
+        app:layout_constraintTop_toTopOf="@+id/materialCardView"
+        app:layout_constraintVertical_bias="0.555" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:adjustViewBounds="true"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/app_icon_dark2"
+        app:layout_constraintBottom_toTopOf="@+id/home_search_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.appcompat.widget.SearchView
         android:id="@+id/home_search_view"
         android:layout_width="0dp"
@@ -155,16 +166,24 @@
                     </androidx.cardview.widget.CardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/home_main_book_image"
+                <androidx.cardview.widget.CardView
+                    android:layout_marginVertical="4dp"
+                    app:cardElevation="6dp"
                     android:layout_width="wrap_content"
                     android:layout_height="260dp"
+                    app:cardCornerRadius="22dp"
                     android:layout_marginEnd="16dp"
-                    android:adjustViewBounds="true"
                     android:src="@drawable/book_image"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent" >
+                    <ImageView
+                        android:id="@+id/home_main_book_image"
+                        android:adjustViewBounds="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/book_image"/>
+                </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

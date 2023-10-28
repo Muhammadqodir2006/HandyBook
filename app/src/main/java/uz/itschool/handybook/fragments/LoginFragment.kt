@@ -17,12 +17,12 @@ import uz.itschool.handybook.model.SignIn
 import uz.itschool.handybook.model.User
 import uz.itschool.handybook.networking.APIClient
 import uz.itschool.handybook.networking.APIService
-import uz.itschool.housesales.preferences.SharedPrefHelper
+import uz.itschool.handybook.util.SharedPrefHelper
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val api = APIClient.getInstance().create(APIService::class.java)
-    private lateinit var shared :SharedPrefHelper
+    private lateinit var shared : SharedPrefHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,10 +34,19 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
 
+        setRememberme()
         setLoginButton()
         setBackButton()
 
         return binding.root
+    }
+
+    private fun setRememberme() {
+        val username = shared.getRememberMe()
+        if (username != null) {
+            binding.loginRememberMeAcchb.isChecked =true
+            binding.loginUsernameEditAcet.setText(username)
+        }
     }
 
 

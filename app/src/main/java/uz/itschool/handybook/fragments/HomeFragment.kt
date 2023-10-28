@@ -11,43 +11,39 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import coil.load
 import retrofit2.Call
 import retrofit2.Response
+import uz.itschool.handybook.R
 import uz.itschool.handybook.adapter.BookAdapter
 import uz.itschool.handybook.databinding.FragmentHomeBinding
 import uz.itschool.handybook.model.Book
 import uz.itschool.handybook.networking.APIClient
 import uz.itschool.handybook.networking.APIService
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import uz.itschool.handybook.util.SharedPrefHelper
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val api = APIClient.getInstance().create(APIService::class.java)
-
-
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var shared: SharedPrefHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.homeAllRecycler.layoutManager = StaggeredGridLayoutManager(2,  StaggeredGridLayoutManager.VERTICAL)
+        binding.homeAllRecycler.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        shared = SharedPrefHelper.getInstance(requireContext())
 
+        setUserImage()
         setMainBook()
         setAllRecycler()
 
-
         return binding.root
+    }
+
+    private fun setUserImage() {
+        binding.homeUserImage.setOnClickListener {
+
+            parentFragmentManager.beginTransaction().replace(R.id.main_fragment_container, ProfileFragment()).commit()
+        }
     }
 
     private fun setAllRecycler() {
@@ -81,16 +77,5 @@ class HomeFragment : Fragment() {
             }
 
         })
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

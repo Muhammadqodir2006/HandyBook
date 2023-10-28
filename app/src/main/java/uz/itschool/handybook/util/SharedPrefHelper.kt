@@ -1,4 +1,4 @@
-package uz.itschool.housesales.preferences
+package uz.itschool.handybook.util
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -39,12 +39,12 @@ class SharedPrefHelper private constructor(context: Context) {
     }
     fun setRememberMe(username:String){
         if (username == "") {
-            edit.remove(rememberMeKEY)
+            edit.remove(rememberMeKEY).apply()
         }else{
             edit.putString(rememberMeKEY, username).apply()
         }
     }
-    fun getRememberMe(username: String): String? {
+    fun getRememberMe(): String? {
         return shared.getString(rememberMeKEY, null)
     }
 

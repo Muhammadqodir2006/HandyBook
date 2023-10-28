@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import uz.itschool.handybook.R
 import uz.itschool.handybook.databinding.FragmentSplashBinding
-import uz.itschool.housesales.preferences.SharedPrefHelper
+import uz.itschool.handybook.util.SharedPrefHelper
 
 class SplashFragment : Fragment() {
     private lateinit var binding : FragmentSplashBinding

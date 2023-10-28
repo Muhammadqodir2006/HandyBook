@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:animateLayoutChanges="true"
     tools:context=".fragments.SignUpFragment">
 
     <androidx.cardview.widget.CardView
@@ -24,9 +25,9 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:contentDescription="login back button"
+            android:focusable="true"
             android:padding="8dp"
-            android:src="@drawable/back_icon"
-            android:focusable="true" />
+            android:src="@drawable/back_icon" />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -46,7 +47,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -149,6 +152,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Username kamida 5 ta belgidan iborat bo'lishi kerak"
+                android:textColor="@color/red"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/login_username_edit_acet"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/login_username_edit_acet" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Email"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/login_username_edit_acet"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/signup_email_edit_acet"
+                style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/edit_text_shape"
+                android:inputType="textEmailAddress"
+                android:lines="1"
+                android:maxLines="1"
+                android:hint="example@email.com"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                tools:layout_editor_absoluteX="24dp" />
+
+            <TextView
+                android:id="@+id/signup_email_incorrect_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email noto'g'ri kiritilgan"
                 android:textColor="@color/red"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/login_username_edit_acet"

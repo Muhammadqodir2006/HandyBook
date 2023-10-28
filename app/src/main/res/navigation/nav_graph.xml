@@ -22,7 +22,12 @@
         android:id="@+id/mainFragment"
         android:name="uz.itschool.handybook.fragments.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment"
+            app:popUpTo="@id/nav_host" />
+    </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="uz.itschool.handybook.fragments.WelcomeFragment"

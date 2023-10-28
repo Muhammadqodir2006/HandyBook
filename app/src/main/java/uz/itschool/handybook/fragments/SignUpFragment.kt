@@ -17,7 +17,7 @@ import uz.itschool.handybook.model.SignUp
 import uz.itschool.handybook.model.User
 import uz.itschool.handybook.networking.APIClient
 import uz.itschool.handybook.networking.APIService
-import uz.itschool.housesales.preferences.SharedPrefHelper
+import uz.itschool.handybook.util.SharedPrefHelper
 
 class SignUpFragment : Fragment() {
     private lateinit var binding: FragmentSignUpBinding
@@ -59,23 +59,23 @@ class SignUpFragment : Fragment() {
                 username = binding.signupUsernameEditAcet.text.toString().trim(),
                 fullname = binding.signupFirstnameAcet.text.toString()
                     .trim() + " " + binding.signupSurnameEditAcet.text.toString().trim(),
-                password = binding.signupPasswordEditAcet.text.toString().trim()
+                password = binding.signupPasswordEditAcet.text.toString().trim(),
+                email = binding.signupEmailEditAcet.text.toString()
             )
             if (!validate(signUp)) return@setOnClickListener
 
             api.signup(signUp).enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     Log.d("TAG", "$response")
-                    if (!response.isSuccessful) {
-                        showToast("sign up error")
-                        return
-                    }
                     if (response.code() == 422){
                         showToast("Username allaqachon olingan")
                         binding.signupUsernameEditAcet.setText("")
                         return
                     }
-
+                    if (!response.isSuccessful) {
+                        showToast("sign up error")
+                        return
+                    }
                     val user = response.body()!!
                     shared.setUser(user)
                     findNavController().navigate(R.id.action_signUpFragment_to_mainFragment)
@@ -104,6 +104,11 @@ class SignUpFragment : Fragment() {
             binding.signupUsernameIncorrectTv.visibility = View.VISIBLE
             out = false
         } else binding.signupUsernameIncorrectTv.visibility = View.GONE
+
+        if (!signUp.email.contains("@")) {
+            binding.signupEmailIncorrectTv.visibility = View.VISIBLE
+            out = false
+        } else binding.signupEmailIncorrectTv.visibility = View.GONE
 
         if (signUp.password.length < 8) {
             binding.signupPasswordIncorrectTv.visibility = View.VISIBLE

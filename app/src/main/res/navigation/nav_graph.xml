@@ -63,4 +63,9 @@
             app:destination="@id/mainFragment"
             app:popUpTo="@id/nav_host" />
     </fragment>
+    <fragment
+        android:id="@+id/addCommentFragment"
+        android:name="uz.itschool.handybook.fragments.AddCommentFragment"
+        android:label="fragment_add_comment"
+        tools:layout="@layout/fragment_add_comment" />
 </navigation>

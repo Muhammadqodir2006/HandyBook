@@ -71,6 +71,7 @@
         android:textSize="16sp"
         android:layout_marginBottom="12dp"
         app:cornerRadius="10dp"
+        app:rippleColor="@color/ripple_gray"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

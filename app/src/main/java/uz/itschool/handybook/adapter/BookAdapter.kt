@@ -15,7 +15,7 @@ import coil.load
 import uz.itschool.handybook.R
 import uz.itschool.handybook.model.Book
 
-class BookAdapter(private val books : List<Book>, val context: Context, val isVertical : Boolean): RecyclerView.Adapter<BookAdapter.BookHolder>() {
+class BookAdapter(var books : List<Book>, val context: Context, val isVertical : Boolean): RecyclerView.Adapter<BookAdapter.BookHolder>() {
     inner class BookHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val title:TextView = itemView.findViewById(R.id.book_item_title)
         val audio:ImageView = itemView.findViewById(R.id.book_item_audio)

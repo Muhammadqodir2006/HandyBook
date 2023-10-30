@@ -1,6 +1,6 @@
 package uz.itschool.handybook.model
 
-data class Comment(
+data class CommentResponse(
     val text: String,
     val username: String
 )

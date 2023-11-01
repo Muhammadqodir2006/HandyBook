@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:id="@+id/category_mcv"
-    app:strokeColor="@color/blue2"
+    app:strokeColor="@color/primary"
     android:layout_marginVertical="8dp"
     android:layout_marginHorizontal="4dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,7 +17,7 @@
         android:layout_marginVertical="8dp"
         android:layout_marginHorizontal="16dp"
         android:textSize="18sp"
-        android:textColor="@color/blue2"
+        android:textColor="@color/primary"
         android:text="Shoes"/>
 
 </com.google.android.material.card.MaterialCardView>

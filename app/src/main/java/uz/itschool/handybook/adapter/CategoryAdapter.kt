@@ -37,11 +37,11 @@ class CategoryAdapter(
             holder.text.text = categories[position - 1].type_name.capitalize()
         }
         if (current == position) {
-            holder.cardView.setCardBackgroundColor(context.resources.getColor(R.color.blue2))
+            holder.cardView.setCardBackgroundColor(context.resources.getColor(R.color.primary))
             holder.text.setTextColor(context.resources.getColor(R.color.white))
         } else {
             holder.cardView.setCardBackgroundColor(context.resources.getColor(R.color.white))
-            holder.text.setTextColor(context.resources.getColor(R.color.blue2))
+            holder.text.setTextColor(context.resources.getColor(R.color.primary))
         }
         holder.cardView.setOnClickListener {
             if (position != current) {

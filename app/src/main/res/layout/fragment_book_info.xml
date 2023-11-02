@@ -16,7 +16,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,30 +23,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/back"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_gravity="start"
             android:background="@drawable/back_icon"
-            app:backgroundTint="@color/white" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/josefin_sans"
-            android:text="Batafsil"
-            android:textColor="@color/white"
-
-            android:textSize="33dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/book_mark"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="end"
-            android:background="@drawable/bookmark_icon"
-            app:backgroundTint="@color/white" />
+            android:backgroundTint="@color/white"
+            />
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
@@ -58,7 +38,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.178" />
 
     <androidx.appcompat.widget.AppCompatImageView

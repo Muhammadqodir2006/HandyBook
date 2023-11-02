@@ -68,4 +68,9 @@
         android:name="uz.itschool.handybook.fragments.AddCommentFragment"
         android:label="fragment_add_comment"
         tools:layout="@layout/fragment_add_comment" />
+    <fragment
+        android:id="@+id/bookInfoFragment"
+        android:name="uz.itschool.handybook.fragments.BookInfoFragment"
+        android:label="fragment_book_info"
+        tools:layout="@layout/fragment_book_info" />
 </navigation>

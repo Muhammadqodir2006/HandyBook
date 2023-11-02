@@ -55,7 +55,15 @@ class MoreBooksFragment : Fragment() {
             override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
                 var books = response.body()!!
 
-                binding.moreBooksRecycler.adapter = BookAdapter(books, requireContext(), true)
+                binding.moreBooksRecycler.adapter = BookAdapter(books, requireContext(), true,
+                    object : BookAdapter.BookClicked{
+                        override fun onClicked(book: Book) {
+                            parentFragmentManager.beginTransaction()
+                                .replace(R.id.main_fragment_container,
+                                    BookInfoFragment.newInstance(book)).commit()
+                        }
+
+                    })
             }
 
             override fun onFailure(call: Call<List<Book>>, t: Throwable) {

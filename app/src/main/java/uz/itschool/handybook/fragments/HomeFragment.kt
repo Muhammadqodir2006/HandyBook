@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import coil.load
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import uz.itschool.handybook.R
 import uz.itschool.handybook.adapter.BookAdapter
 import uz.itschool.handybook.adapter.CategoryAdapter
 import uz.itschool.handybook.databinding.FragmentHomeBinding
@@ -39,7 +41,15 @@ class HomeFragment : Fragment() {
         binding.homeAllRecycler.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         shared = SharedPrefHelper.getInstance(requireContext())
 
-        adapter = BookAdapter(listOf(), requireContext(), true)
+        adapter = BookAdapter(listOf(), requireContext(), true,
+            object : BookAdapter.BookClicked{
+                override fun onClicked(book: Book) {
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.main_fragment_container,
+                            BookInfoFragment.newInstance(book)).commit()
+                }
+
+            })
         binding.homeAllRecycler.adapter = adapter
 
         setMainBook()

@@ -1,29 +1,18 @@
 package uz.itschool.handybook.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import uz.itschool.handybook.R
 import uz.itschool.handybook.databinding.FragmentProfileBinding
 import uz.itschool.handybook.util.SharedPrefHelper
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var shared: SharedPrefHelper
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,8 +20,22 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         shared = SharedPrefHelper.getInstance(requireContext())
 
-        binding.profileUsername.text = shared.getUser()!!.fullname
+        setLogoutButton()
+
+        val user = shared.getUser()
+
+        binding.logoutFirstnameAcet.text = user?.fullname
+        binding.logoutUsernameEditAcet.text = user?.username
+
 
         return binding.root
+    }
+
+
+    private fun setLogoutButton() {
+        binding.logoutLogoutMb.setOnClickListener {
+            shared.logout()
+            findNavController().navigate(R.id.action_mainFragment_to_welcomeFragment)
+        }
     }
 }

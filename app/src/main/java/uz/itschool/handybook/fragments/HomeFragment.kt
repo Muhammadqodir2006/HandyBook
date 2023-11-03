@@ -79,8 +79,10 @@ class HomeFragment : Fragment() {
                     override fun onPressed(category: String?) {
                         if (category == null){
                             setAllBooks(allBooks)
+                            binding.homeMainBookContainer.visibility = View.VISIBLE
                             return
                         }
+                        binding.homeMainBookContainer.visibility = View.GONE
                         setCategoryChanger(category)
                     }
                 })

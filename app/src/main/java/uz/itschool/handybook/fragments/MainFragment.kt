@@ -27,10 +27,21 @@ class MainFragment : Fragment() {
     private fun setBottomNavigation() {
         binding.mainBottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.home_sc -> if (binding.mainBottomNavigation.selectedItemId != R.id.home_sc) loadFragment(HomeFragment())
-                R.id.reading_sc -> if (binding.mainBottomNavigation.selectedItemId != R.id.reading_sc){}
-                R.id.bookmark_sc -> if (binding.mainBottomNavigation.selectedItemId != R.id.bookmark_sc){}
-                R.id.profile_sc -> if (binding.mainBottomNavigation.selectedItemId != R.id.profile_sc) loadFragment(ProfileFragment())
+                R.id.home_sc -> if (binding.mainBottomNavigation.selectedItemId != R.id.home_sc) loadFragment(
+                    HomeFragment()
+                )
+
+                R.id.reading_sc -> if (binding.mainBottomNavigation.selectedItemId != R.id.reading_sc) loadFragment(
+                    ReadFragment()
+                )
+
+                R.id.bookmark_sc -> if (binding.mainBottomNavigation.selectedItemId != R.id.bookmark_sc) loadFragment(
+                    SavedFragment()
+                )
+
+                R.id.profile_sc -> if (binding.mainBottomNavigation.selectedItemId != R.id.profile_sc) loadFragment(
+                    ProfileFragment()
+                )
             }
             true
         }
@@ -38,11 +49,13 @@ class MainFragment : Fragment() {
 
     private fun loadFragment(fragment: Fragment) {
         val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.fragment_appear)
-        anim.setAnimationListener(object : Animation.AnimationListener{
+        anim.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation?) {
-                parentFragmentManager.beginTransaction().replace(R.id.main_fragment_container, fragment)
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.main_fragment_container, fragment)
                     .commit()
             }
+
             override fun onAnimationEnd(animation: Animation?) {}
             override fun onAnimationRepeat(animation: Animation?) {}
 

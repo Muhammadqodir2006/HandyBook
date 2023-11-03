@@ -30,10 +30,6 @@ class BookInfoFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding= FragmentBookInfoBinding.inflate(inflater,container,false)
-
-        binding.backBtnBookinfo.setOnClickListener {
-            findNavController().popBackStack()
-        }
         
         return binding.root
     }

@@ -47,7 +47,7 @@ class DescriptionFragment : Fragment() {
     ): View {
         _binding= FragmentDescriptionBinding.inflate(inflater,container,false)
         fetchBook()
-        binding.textView5.text=book.description
+//        binding.textView5.text=book.description
         return binding.root
     }
     fun fetchBook(){

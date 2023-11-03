@@ -48,8 +48,8 @@ class BookInfoFragment : Fragment() {
         binding.tabLayoutBook.setupWithViewPager(binding.viewPager)
         binding.viewPager.adapter=fragmentAdapter
 
-        binding.bookTitle.text = book.name
-        binding.imageView4.load(book.image)
+//        binding.bookTitle.text = book.name
+//        binding.imageView4.load(book.image)
         infoFragmentAdapter.addFragment(DescriptionFragment(),"Description")
         infoFragmentAdapter.addFragment(CommentsFragment(),"Coments")
         binding.l.adapter=infoFragmentAdapter

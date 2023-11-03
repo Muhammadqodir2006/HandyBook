@@ -1,11 +1,13 @@
 package uz.itschool.handybook.fragments
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import coil.load
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,17 +41,28 @@ class BookInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        fetchBook()
+        object: CountDownTimer(1000,100){
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+
+            override fun onFinish() {
+
+            }
+        }.start()
         _binding= FragmentBookInfoBinding.inflate(inflater,container,false)
         fragmentAdapter.addFragment(EBookFragment(),"E-Book")
         fragmentAdapter.addFragment(AudioFragment(),"Audio Book")
         binding.tabLayoutBook.setupWithViewPager(binding.viewPager)
         binding.viewPager.adapter=fragmentAdapter
 
+        binding.bookTitle.text=book.name
+        binding.imageView4.load(book.image)
         infoFragmentAdapter.addFragment(DescriptionFragment(),"Description")
         infoFragmentAdapter.addFragment(CommentsFragment(),"Coments")
         binding.l.adapter=infoFragmentAdapter
         binding.tabLayoutInfo.setupWithViewPager(binding.l)
-
         return binding.root
     }
     fun fetchBook(){

@@ -5,7 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import uz.itschool.handybook.R
+import uz.itschool.handybook.adapter.ComentsAdapter
+import uz.itschool.handybook.databinding.FragmentBookInfoBinding
+import uz.itschool.handybook.databinding.FragmentCommentsBinding
+import uz.itschool.handybook.model.Book
+import uz.itschool.handybook.model.CommentResponse
 import uz.itschool.handybook.networking.APIClient
 import uz.itschool.handybook.networking.APIService
 
@@ -23,7 +31,10 @@ class CommentsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private val bookAPI by lazy { APIClient.getInstance().create(APIService::class.java)}
-
+    private var _binding: FragmentCommentsBinding?? =null
+    private val binding get() =_binding!!
+    private var comments=ArrayList<CommentResponse>()
+    private val commentAdapter by lazy { ComentsAdapter(comments) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,8 +46,30 @@ class CommentsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        fetchComments()
+        _binding=FragmentCommentsBinding.inflate(layoutInflater,container,false)
+        binding.comments.adapter=commentAdapter
+        return binding.root
+    }
+    fun fetchComments(){
+        bookAPI.getComments(1).enqueue(object : Callback<List<CommentResponse>>{
+            override fun onResponse(
+                call: Call<List<CommentResponse>>,
+                response: Response<List<CommentResponse>>,
+            ) {
+                var body = response.body()
+                if (response.isSuccessful && body!=null){
+                    comments.clear()
+                    comments.addAll(body)
+                    commentAdapter.notifyDataSetChanged()
+                }
+            }
 
-        return inflater.inflate(R.layout.fragment_comments, container, false)
+            override fun onFailure(call: Call<List<CommentResponse>>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     companion object {

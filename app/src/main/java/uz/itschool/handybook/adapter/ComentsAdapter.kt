@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.itschool.handybook.databinding.CommentItemBinding
 import uz.itschool.handybook.databinding.FragmentCommentsBinding
-import uz.itschool.handybook.model.Comment
+import uz.itschool.handybook.model.CommentResponse
 
-class ComentsAdapter(var list:ArrayList<Comment>):RecyclerView.Adapter<ComentsAdapter.MyHolder>() {
+class ComentsAdapter(var list:ArrayList<CommentResponse>):RecyclerView.Adapter<ComentsAdapter.MyHolder>() {
     class MyHolder(binding: CommentItemBinding):RecyclerView.ViewHolder(binding.root) {
         var commentBody= binding.comentBody
         var username=binding.username

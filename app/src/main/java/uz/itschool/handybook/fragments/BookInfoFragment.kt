@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import uz.itschool.handybook.R
+import uz.itschool.handybook.adapter.ViewPagerAdapter
 import uz.itschool.handybook.databinding.FragmentBookInfoBinding
 import uz.itschool.handybook.model.Book
 import uz.itschool.handybook.networking.APIClient
@@ -36,7 +38,7 @@ class BookInfoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding= FragmentBookInfoBinding.inflate(inflater,container,false)
         fragmentAdapter.addFragment(EBookFragment(),"E-Book")
         fragmentAdapter.addFragment(AudioFragment(),"Audio Book")
@@ -51,7 +53,7 @@ class BookInfoFragment : Fragment() {
         return binding.root
     }
     fun fetchBook(){
-        bookAPI.getBook(1).enqueue(object :Callback<Book>{
+        bookAPI.getBook(1).enqueue(object : Callback<Book> {
             override fun onResponse(call: Call<Book>, response: Response<Book>) {
                 var body=response.body()
                 if (response.isSuccessful&& body!=null){

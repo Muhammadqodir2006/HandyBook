@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <alpha
+        android:duration="300"
         android:fromAlpha="1"
         android:toAlpha="0" />
     <scale
@@ -8,6 +9,7 @@
         android:fromYScale="1"
         android:pivotX="50%"
         android:pivotY="50%"
+        android:duration="300"
         android:toXScale="1.2"
         android:toYScale="1.2" />
 </set>

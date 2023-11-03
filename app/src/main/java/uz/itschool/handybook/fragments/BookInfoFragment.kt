@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import uz.itschool.handybook.R
 import uz.itschool.handybook.databinding.FragmentBookInfoBinding
 import uz.itschool.handybook.model.Book
@@ -29,6 +30,10 @@ class BookInfoFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding= FragmentBookInfoBinding.inflate(inflater,container,false)
+
+        binding.backBtnBookinfo.setOnClickListener {
+            findNavController().popBackStack()
+        }
         
         return binding.root
     }

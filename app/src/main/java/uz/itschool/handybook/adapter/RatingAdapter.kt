@@ -10,7 +10,7 @@ import uz.itschool.handybook.R
 
 class RatingAdapter(private val ratingClick: RatingClickInterface) :
     RecyclerView.Adapter<RatingAdapter.RatingHolder>() {
-    private var rating = 3
+    var rating = 3
 
     inner class RatingHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val img: ImageView = itemView.findViewById(R.id.rating_item_image_iv)

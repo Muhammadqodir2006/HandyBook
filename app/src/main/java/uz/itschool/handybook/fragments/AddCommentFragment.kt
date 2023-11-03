@@ -4,19 +4,29 @@ package uz.itschool.handybook.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import retrofit2.Call
+import retrofit2.Response
 import uz.itschool.handybook.R
 import uz.itschool.handybook.adapter.RatingAdapter
 import uz.itschool.handybook.databinding.FragmentAddCommentBinding
+import uz.itschool.handybook.model.AddComment
+import uz.itschool.handybook.model.AddCommentResponse
 import uz.itschool.handybook.model.Book
+import uz.itschool.handybook.networking.APIClient
+import uz.itschool.handybook.networking.APIService
+import uz.itschool.handybook.util.SharedPrefHelper
+import javax.security.auth.callback.Callback
 
 private const val ARG_PARAM1 = "book"
 
@@ -55,7 +65,34 @@ class AddCommentFragment : Fragment() {
     }
 
     private fun setSendListener() {
-        // TODO: Set listener
+        val  comment = binding.addCommentEditText.text.toString()
+        if (comment == "") {
+            Toast.makeText(requireContext(), "Kommentariya yozing", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val rating = ratingAdapter.rating
+        val api = APIClient.getInstance().create(APIService::class.java)
+        val shared = SharedPrefHelper.getInstance(requireContext())
+        val user = shared.getUser()!!
+        api.addComment(AddComment(book.id, rating, comment, user.id)).enqueue(object : retrofit2.Callback<AddCommentResponse>{
+            override fun onResponse(
+                call: Call<AddCommentResponse>,
+                response: Response<AddCommentResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Toast.makeText(requireContext(), "Kommentariya qo'shildi", Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
+                }
+            }
+
+            override fun onFailure(call: Call<AddCommentResponse>, t: Throwable) {
+                Toast.makeText(requireContext(), "Xatolik yuz berdi", Toast.LENGTH_SHORT).show()
+                Log.d("TAG", "$t")
+            }
+
+        })
+
+
     }
 
     private fun setEmojiRate() {
@@ -164,7 +201,7 @@ class AddCommentFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun setTitleText() {
-//        binding.addCommentTitleText.text = """"“${book.name}” asari sizga qanchalik manzur keldi?"""
+        binding.addCommentTitleText.text = """"“${book.name}” asari sizga qanchalik manzur keldi?"""
     }
 
     private fun setBookMarkButton() {

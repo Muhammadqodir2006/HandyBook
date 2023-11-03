@@ -42,7 +42,7 @@ class MoreBooksFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMoreBooksBinding.inflate(inflater, container, false)
 
         setAdapter()
@@ -50,7 +50,7 @@ class MoreBooksFragment : Fragment() {
         return binding.root
     }
 
-    fun setAdapter(){
+    private fun setAdapter(){
         api.getBookByCategory(category).enqueue(object : Callback<List<Book>>{
             override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
                 var books = response.body()!!
@@ -73,15 +73,6 @@ class MoreBooksFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MoreBooksFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(category: String) =
             MoreBooksFragment().apply {

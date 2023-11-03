@@ -44,9 +44,9 @@ class HomeFragment : Fragment() {
         adapter = BookAdapter(listOf(), requireContext(), true,
             object : BookAdapter.BookClicked{
                 override fun onClicked(book: Book) {
-                    parentFragmentManager.beginTransaction()
-                        .replace(R.id.main_fragment_container,
-                            BookInfoFragment.newInstance(book)).commit()
+                    val bundle = Bundle()
+                    bundle.putSerializable("param1", book)
+                    findNavController().navigate(R.id.action_mainFragment_to_bookInfoFragment)
                 }
 
             })

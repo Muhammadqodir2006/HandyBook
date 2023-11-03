@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import uz.itschool.handybook.R
 import uz.itschool.handybook.databinding.FragmentMainBinding
@@ -35,8 +37,17 @@ class MainFragment : Fragment() {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        parentFragmentManager.beginTransaction().replace(R.id.main_fragment_container, fragment)
-            .commit()
+        val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.fragment_appear)
+        anim.setAnimationListener(object : Animation.AnimationListener{
+            override fun onAnimationStart(animation: Animation?) {
+                parentFragmentManager.beginTransaction().replace(R.id.main_fragment_container, fragment)
+                    .commit()
+            }
+            override fun onAnimationEnd(animation: Animation?) {}
+            override fun onAnimationRepeat(animation: Animation?) {}
+
+        })
+        binding.mainFragmentContainer.startAnimation(anim)
     }
 
     private fun setFragmentView() {

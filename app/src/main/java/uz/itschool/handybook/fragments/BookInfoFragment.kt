@@ -14,7 +14,7 @@ private const val ARG_PARAM1 = "param1"
 class BookInfoFragment : Fragment() {
 
     private var param1: Book? = null
-    private var _binding: FragmentBookInfoBinding?? =null
+    private var _binding: FragmentBookInfoBinding? =null
     private val binding get() =_binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ class BookInfoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding= FragmentBookInfoBinding.inflate(inflater,container,false)
         
         return binding.root

@@ -7,7 +7,7 @@ data class Book(
     val author: String,
     val count_page: Int,
     val description: String,
-    val `file`: String,
+    val file: String,
     val id: Int,
     val image: String,
     val lang: String,

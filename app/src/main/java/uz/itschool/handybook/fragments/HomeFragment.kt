@@ -49,7 +49,7 @@ class HomeFragment : Fragment() {
                     findNavController().navigate(R.id.action_mainFragment_to_bookInfoFragment)
                 }
 
-            })
+            }, shared)
         binding.homeAllRecycler.adapter = adapter
 
         setMainBook()

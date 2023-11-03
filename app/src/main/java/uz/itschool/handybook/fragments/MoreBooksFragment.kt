@@ -15,6 +15,7 @@ import uz.itschool.handybook.databinding.FragmentMoreBooksBinding
 import uz.itschool.handybook.model.Book
 import uz.itschool.handybook.networking.APIClient
 import uz.itschool.handybook.networking.APIService
+import uz.itschool.handybook.util.SharedPrefHelper
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,7 +64,7 @@ class MoreBooksFragment : Fragment() {
                                     BookInfoFragment.newInstance(book)).commit()
                         }
 
-                    })
+                    }, SharedPrefHelper.getInstance(requireContext()))
             }
 
             override fun onFailure(call: Call<List<Book>>, t: Throwable) {

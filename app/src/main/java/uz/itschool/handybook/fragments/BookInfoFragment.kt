@@ -18,12 +18,12 @@ import uz.itschool.handybook.model.Book
 import uz.itschool.handybook.networking.APIClient
 import uz.itschool.handybook.networking.APIService
 
-private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM1 = "book"
 
 class BookInfoFragment : Fragment() {
 
 
-    private var _binding: FragmentBookInfoBinding?? =null
+    private var _binding: FragmentBookInfoBinding? =null
     private val binding get() =_binding!!
     private val bookAPI by lazy { APIClient.getInstance().create(APIService::class.java)}
     private val fragmentAdapter by lazy { ViewPagerAdapter(parentFragmentManager) }
@@ -41,22 +41,14 @@ class BookInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        object: CountDownTimer(1000,100){
-            override fun onTick(millisUntilFinished: Long) {
 
-            }
-
-            override fun onFinish() {
-
-            }
-        }.start()
         _binding= FragmentBookInfoBinding.inflate(inflater,container,false)
         fragmentAdapter.addFragment(EBookFragment(),"E-Book")
         fragmentAdapter.addFragment(AudioFragment(),"Audio Book")
         binding.tabLayoutBook.setupWithViewPager(binding.viewPager)
         binding.viewPager.adapter=fragmentAdapter
 
-        binding.bookTitle.text=book.name
+        binding.bookTitle.text = book.name
         binding.imageView4.load(book.image)
         infoFragmentAdapter.addFragment(DescriptionFragment(),"Description")
         infoFragmentAdapter.addFragment(CommentsFragment(),"Coments")

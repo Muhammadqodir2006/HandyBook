@@ -5,21 +5,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.itschool.handybook.databinding.CommentItemBinding
 import uz.itschool.handybook.databinding.FragmentCommentsBinding
+import uz.itschool.handybook.model.Comment
 
-class ComentsAdapter:RecyclerView.Adapter<ComentsAdapter.MyHolder>() {
-    class MyHolder(binding: FragmentCommentsBinding):RecyclerView.ViewHolder(binding.root) {
-
+class ComentsAdapter(var list:ArrayList<Comment>):RecyclerView.Adapter<ComentsAdapter.MyHolder>() {
+    class MyHolder(binding: CommentItemBinding):RecyclerView.ViewHolder(binding.root) {
+        var commentBody= binding.comentBody
+        var username=binding.username
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
-        return MyHolder(FragmentCommentsBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return MyHolder(CommentItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return list.size
     }
 
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
-        TODO("Not yet implemented")
+        var comment=list[position]
+        holder.username.text=comment.username
+        holder.commentBody.text=comment.text
     }
 }

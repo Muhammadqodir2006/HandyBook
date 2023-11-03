@@ -20,7 +20,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class EBookFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private val newsApi by lazy { APIClient.getInstance().create(APIService::class.java)}
 

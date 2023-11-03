@@ -5,7 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import uz.itschool.handybook.R
+import uz.itschool.handybook.databinding.FragmentBookInfoBinding
+import uz.itschool.handybook.databinding.FragmentDescriptionBinding
+import uz.itschool.handybook.model.Book
+import uz.itschool.handybook.networking.APIClient
+import uz.itschool.handybook.networking.APIService
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,7 +29,10 @@ class DescriptionFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private var _binding: FragmentDescriptionBinding?? =null
+    private lateinit var book: Book
+    private val binding get() =_binding!!
+    private val bookAPI by lazy { APIClient.getInstance().create(APIService::class.java)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,8 +45,23 @@ class DescriptionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_description, container, false)
+        _binding= FragmentDescriptionBinding.inflate(inflater,container,false)
+        fetchBook()
+        binding.textView5.text=book.description
+        return binding.root
+    }
+    fun fetchBook(){
+        bookAPI.getBook(1).enqueue(object : Callback<Book> {
+            override fun onResponse(call: Call<Book>, response: Response<Book>) {
+                var body=response.body()
+                if (response.isSuccessful&& body!=null){
+                    book=body
+                }
+            }
+
+            override fun onFailure(call: Call<Book>, t: Throwable) {
+            }
+        })
     }
 
     companion object {

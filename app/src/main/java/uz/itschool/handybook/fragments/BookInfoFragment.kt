@@ -22,7 +22,7 @@ private const val ARG_PARAM1 = "param1"
 
 class BookInfoFragment : Fragment() {
 
-    private var param1: Book? = null
+
     private var _binding: FragmentBookInfoBinding?? =null
     private val binding get() =_binding!!
     private val bookAPI by lazy { APIClient.getInstance().create(APIService::class.java)}
@@ -33,7 +33,7 @@ class BookInfoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getSerializable(ARG_PARAM1) as Book
+            book = it.getSerializable(ARG_PARAM1) as Book
         }
     }
 
@@ -41,7 +41,6 @@ class BookInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        fetchBook()
         object: CountDownTimer(1000,100){
             override fun onTick(millisUntilFinished: Long) {
 
@@ -64,19 +63,6 @@ class BookInfoFragment : Fragment() {
         binding.l.adapter=infoFragmentAdapter
         binding.tabLayoutInfo.setupWithViewPager(binding.l)
         return binding.root
-    }
-    fun fetchBook(){
-        bookAPI.getBook(1).enqueue(object : Callback<Book> {
-            override fun onResponse(call: Call<Book>, response: Response<Book>) {
-                var body=response.body()
-                if (response.isSuccessful&& body!=null){
-                    book=body
-                }
-            }
-
-            override fun onFailure(call: Call<Book>, t: Throwable) {
-            }
-        })
     }
 
     companion object {

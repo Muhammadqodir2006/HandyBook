@@ -52,7 +52,7 @@ class SharedPrefHelper private constructor(context: Context) {
         return shared.getString(rememberMeKEY, null)
     }
 
-    private fun getSaved(): List<Book> {
+    fun getSaved(): List<Book> {
         val data = shared.getString(savedKEY, "")
         if (data == "") return listOf()
         val typeToken = object : TypeToken<List<Book>>() {}.type
@@ -84,7 +84,7 @@ class SharedPrefHelper private constructor(context: Context) {
         }
         return false
     }
-    private fun getRead(): List<Book> {
+    fun getRead(): List<Book> {
         val data = shared.getString(readKEY, "")
         if (data == "") return listOf()
         val typeToken = object : TypeToken<List<Book>>() {}.type

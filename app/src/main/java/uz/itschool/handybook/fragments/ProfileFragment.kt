@@ -31,6 +31,8 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         shared = SharedPrefHelper.getInstance(requireContext())
 
+        binding.profileUsername.text = shared.getUser()!!.fullname
+
         return binding.root
     }
 }

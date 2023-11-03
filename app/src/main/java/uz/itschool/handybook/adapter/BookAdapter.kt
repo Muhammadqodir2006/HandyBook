@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import uz.itschool.handybook.R
 import uz.itschool.handybook.model.Book
+import uz.itschool.handybook.util.SharedPrefHelper
 
 class BookAdapter(var books : List<Book>, val context: Context, val isVertical : Boolean,
-    val bookClicked: BookClicked): RecyclerView.Adapter<BookAdapter.BookHolder>() {
+    val bookClicked: BookClicked, val shared: SharedPrefHelper): RecyclerView.Adapter<BookAdapter.BookHolder>() {
+    val saved = MutableList(books.size){false}
     inner class BookHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val title:TextView = itemView.findViewById(R.id.book_item_title)
         val audio:ImageView = itemView.findViewById(R.id.book_item_audio)
@@ -45,9 +47,18 @@ class BookAdapter(var books : List<Book>, val context: Context, val isVertical :
         holder.author.text = book.author
         holder.imageIV.load(book.image)
         holder.rating.text = book.reyting.toString()
+        if (shared.isSaved(book.id)) {
+            saved[position] = true
+            holder.bookmarkIV.setImageResource(R.drawable.bookmark_icon_enabled)
+        }
         holder.bookmarkIV.setOnClickListener {
-            Toast.makeText(context, "Bosildi", Toast.LENGTH_SHORT).show()
-            // TODO: Set listener
+            if (saved[position]){
+                shared.removeSaved(book.id)
+                holder.bookmarkIV.setImageResource(R.drawable.bookmark_icon)
+            }else{
+                shared.addSaved(book)
+                holder.bookmarkIV.setImageResource(R.drawable.bookmark_icon_enabled)
+            }
         }
         if (isVertical){
             holder.imageCV.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import uz.itschool.handybook.R
 import uz.itschool.handybook.databinding.FragmentSettingsBinding
 import uz.itschool.handybook.util.SharedPrefHelper
 
@@ -40,6 +41,7 @@ class SettingsFragment : Fragment() {
     private fun setLogoutButton() {
         binding.logoutLogoutMb.setOnClickListener {
             shared.logout()
+            findNavController().navigate(R.id.action_mainFragment_to_welcomeFragment)
         }
     }
 }

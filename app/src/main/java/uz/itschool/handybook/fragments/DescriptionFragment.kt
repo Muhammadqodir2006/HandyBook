@@ -29,7 +29,7 @@ class DescriptionFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var _binding: FragmentDescriptionBinding?? =null
+    private var _binding: FragmentDescriptionBinding? =null
     private lateinit var book: Book
     private val binding get() =_binding!!
     private val bookAPI by lazy { APIClient.getInstance().create(APIService::class.java)}
@@ -44,7 +44,7 @@ class DescriptionFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding= FragmentDescriptionBinding.inflate(inflater,container,false)
         fetchBook()
         binding.textView5.text=book.description

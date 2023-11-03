@@ -27,6 +27,12 @@ class Settings private constructor(context: Context) {
         var temp = gson.toJson(user)
         set.putString("user", temp).apply()
     }
+    fun setTempId(id:Int){
+        set.putInt("temp_id",id).apply()
+    }
+    fun getTempId(): Int {
+        return preferences.getInt("temp_id",0)
+    }
     fun getUser() : User? {
         val data = preferences.getString("user", "")
         if (data == "") return null

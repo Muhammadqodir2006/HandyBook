@@ -54,6 +54,9 @@ class BookInfoFragment : Fragment() {
         infoFragmentAdapter.addFragment(DescriptionFragment(),"Description")
         infoFragmentAdapter.addFragment(CommentsFragment(),"Coments")
         binding.l.adapter=infoFragmentAdapter
+        binding.imageView4.setOnClickListener {
+            findNavController().navigate(R.id.action_bookInfoFragment_to_moreInfoFragmentFragment)
+        }
         binding.tabLayoutInfo.setupWithViewPager(binding.l)
         return binding.root
     }

@@ -1,10 +1,12 @@
 package uz.itschool.handybook.fragments
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,7 +35,9 @@ class CommentsFragment : Fragment() {
     private var param1: String? = null
     private val bookAPI by lazy { APIClient.getInstance().create(APIService::class.java)}
     private var _binding: FragmentCommentsBinding?? =null
+    private lateinit var book:Book
     private val binding get() =_binding!!
+    val bundle = Bundle()
     private val shared by lazy {  SharedPrefHelper.getInstance(requireContext())}
     private var comments=ArrayList<CommentResponse>()
     private val commentAdapter by lazy { ComentsAdapter(comments) }
@@ -49,9 +53,33 @@ class CommentsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         fetchComments()
+        fetchBook()
         _binding=FragmentCommentsBinding.inflate(layoutInflater,container,false)
+        object: CountDownTimer(1500,100){
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+
+            override fun onFinish() {
+                bundle.putSerializable("book", book)
+            }
+        }.start()
         binding.comments.adapter=commentAdapter
+
         return binding.root
+    }
+    fun fetchBook(){
+        bookAPI.getBook(shared.getBookId()).enqueue(object : Callback<Book> {
+            override fun onResponse(call: Call<Book>, response: Response<Book>) {
+                var body=response.body()
+                if (response.isSuccessful&& body!=null){
+                    book=body
+                }
+            }
+
+            override fun onFailure(call: Call<Book>, t: Throwable) {
+            }
+        })
     }
     fun fetchComments(){
         bookAPI.getComments(shared.getBookId()).enqueue(object : Callback<List<CommentResponse>>{

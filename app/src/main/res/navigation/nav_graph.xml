@@ -112,5 +112,25 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_bookInfoFragment_to_moreInfoFragmentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:destination="@id/moreInfoFragmentFragment"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/moreInfoFragmentFragment"
+        android:name="uz.itschool.handybook.fragments.MoreInfoFragmentFragment"
+        android:label="fragment_more_info"
+        tools:layout="@layout/fragment_more_info" >
+        <action
+            android:id="@+id/action_moreInfoFragmentFragment_to_addCommentFragment"
+            app:destination="@id/addCommentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
 </navigation>

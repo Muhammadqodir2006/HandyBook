@@ -1,12 +1,21 @@
 package uz.itschool.handybook.fragments
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import uz.itschool.handybook.R
 import uz.itschool.handybook.databinding.FragmentAudioBinding
+import uz.itschool.handybook.model.Book
+import uz.itschool.handybook.networking.APIClient
+import uz.itschool.handybook.networking.APIService
+import uz.itschool.handybook.util.SharedPrefHelper
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,7 +31,10 @@ class AudioFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var _binding:FragmentAudioBinding??=null
+    private val bookAPI by lazy { APIClient.getInstance().create(APIService::class.java)}
+    private val shared by lazy {  SharedPrefHelper.getInstance(requireContext())}
     private val binding get() = _binding!!
+    private lateinit var book:Book
     private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,8 +49,38 @@ class AudioFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        _binding=FragmentAudioBinding.inflate(inflater,container,false)
+        fetchBook()
+        object: CountDownTimer(1500,100){
+            override fun onTick(millisUntilFinished: Long) {
 
-        return inflater.inflate(R.layout.fragment_audio, container, false)
+            }
+
+            override fun onFinish() {
+                binding.audioName.text=book.name
+                binding.play.setOnClickListener {
+                    if (book.audio==null){
+                        Toast.makeText(requireContext(),"Sorry we don't have audio for this book",Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }.start()
+
+
+        return binding.root
+    }
+    fun fetchBook(){
+        bookAPI.getBook(shared.getBookId()).enqueue(object : Callback<Book> {
+            override fun onResponse(call: Call<Book>, response: Response<Book>) {
+                var body=response.body()
+                if (response.isSuccessful&& body!=null){
+                    book=body
+                }
+            }
+
+            override fun onFailure(call: Call<Book>, t: Throwable) {
+            }
+        })
     }
 
     companion object {

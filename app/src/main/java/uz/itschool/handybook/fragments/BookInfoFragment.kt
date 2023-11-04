@@ -17,6 +17,7 @@ import uz.itschool.handybook.databinding.FragmentBookInfoBinding
 import uz.itschool.handybook.model.Book
 import uz.itschool.handybook.networking.APIClient
 import uz.itschool.handybook.networking.APIService
+import uz.itschool.handybook.util.SharedPrefHelper
 
 private const val ARG_PARAM1 = "book"
 
@@ -25,7 +26,7 @@ class BookInfoFragment : Fragment() {
 
     private var _binding: FragmentBookInfoBinding? =null
     private val binding get() =_binding!!
-    private val bookAPI by lazy { APIClient.getInstance().create(APIService::class.java)}
+
     private val fragmentAdapter by lazy { ViewPagerAdapter(parentFragmentManager) }
     private val infoFragmentAdapter by lazy { ViewPagerAdapter(parentFragmentManager) }
     private lateinit var book: Book
@@ -48,8 +49,8 @@ class BookInfoFragment : Fragment() {
         binding.tabLayoutBook.setupWithViewPager(binding.viewPager)
         binding.viewPager.adapter=fragmentAdapter
 
-//        binding.bookTitle.text = book.name
-//        binding.imageView4.load(book.image)
+        binding.bookTitle.text = book.name
+        binding.imageView4.load(book.image)
         infoFragmentAdapter.addFragment(DescriptionFragment(),"Description")
         infoFragmentAdapter.addFragment(CommentsFragment(),"Coments")
         binding.l.adapter=infoFragmentAdapter

@@ -27,7 +27,14 @@ class SharedPrefHelper private constructor(context: Context) {
     private val savedKEY = "saved"
     private val readKEY = "read"
     private val readingKEY = "reading"
+    private val TEMP_BOOK_ID = "tempbook"
 
+    fun setBookId(id: Int){
+        edit.putInt(TEMP_BOOK_ID,id).apply()
+    }
+    fun getBookId():Int{
+        return shared.getInt(TEMP_BOOK_ID,0)
+    }
     fun setUser(user : User) {
         val temp = gson.toJson(user)
         edit.putString(userKEY, temp).apply()

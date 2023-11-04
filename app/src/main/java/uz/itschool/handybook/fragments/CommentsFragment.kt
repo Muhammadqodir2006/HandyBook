@@ -16,6 +16,7 @@ import uz.itschool.handybook.model.Book
 import uz.itschool.handybook.model.CommentResponse
 import uz.itschool.handybook.networking.APIClient
 import uz.itschool.handybook.networking.APIService
+import uz.itschool.handybook.util.SharedPrefHelper
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,6 +34,7 @@ class CommentsFragment : Fragment() {
     private val bookAPI by lazy { APIClient.getInstance().create(APIService::class.java)}
     private var _binding: FragmentCommentsBinding?? =null
     private val binding get() =_binding!!
+    private val shared by lazy {  SharedPrefHelper.getInstance(requireContext())}
     private var comments=ArrayList<CommentResponse>()
     private val commentAdapter by lazy { ComentsAdapter(comments) }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +54,7 @@ class CommentsFragment : Fragment() {
         return binding.root
     }
     fun fetchComments(){
-        bookAPI.getComments(1).enqueue(object : Callback<List<CommentResponse>>{
+        bookAPI.getComments(shared.getBookId()).enqueue(object : Callback<List<CommentResponse>>{
             override fun onResponse(
                 call: Call<List<CommentResponse>>,
                 response: Response<List<CommentResponse>>,

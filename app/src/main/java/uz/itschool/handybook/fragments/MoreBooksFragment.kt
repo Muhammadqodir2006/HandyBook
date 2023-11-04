@@ -30,6 +30,7 @@ private const val ARG_PARAM2 = "param2"
 class MoreBooksFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var category: String = ""
+    private val shared by lazy {  SharedPrefHelper.getInstance(requireContext())}
     lateinit var binding: FragmentMoreBooksBinding
     private val api = APIClient.getInstance().create(APIService::class.java)
 
@@ -59,6 +60,7 @@ class MoreBooksFragment : Fragment() {
                 binding.moreBooksRecycler.adapter = BookAdapter(books, requireContext(), true,
                     object : BookAdapter.BookClicked{
                         override fun onClicked(book: Book) {
+                            shared.setBookId(book.id)
                             parentFragmentManager.beginTransaction()
                                 .replace(R.id.main_fragment_container,
                                     BookInfoFragment.newInstance(book)).commit()

@@ -1,6 +1,7 @@
 package uz.itschool.handybook.fragments
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import uz.itschool.handybook.databinding.FragmentDescriptionBinding
 import uz.itschool.handybook.model.Book
 import uz.itschool.handybook.networking.APIClient
 import uz.itschool.handybook.networking.APIService
+import uz.itschool.handybook.util.SharedPrefHelper
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,6 +34,7 @@ class DescriptionFragment : Fragment() {
     private var _binding: FragmentDescriptionBinding? =null
     private lateinit var book: Book
     private val binding get() =_binding!!
+    private val shared by lazy {  SharedPrefHelper.getInstance(requireContext())}
     private val bookAPI by lazy { APIClient.getInstance().create(APIService::class.java)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,11 +50,20 @@ class DescriptionFragment : Fragment() {
     ): View {
         _binding= FragmentDescriptionBinding.inflate(inflater,container,false)
         fetchBook()
-//        binding.textView5.text=book.description
+        object: CountDownTimer(500,100){
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+
+            override fun onFinish() {
+                binding.description.text=book.description
+            }
+        }.start()
+
         return binding.root
     }
     fun fetchBook(){
-        bookAPI.getBook(1).enqueue(object : Callback<Book> {
+        bookAPI.getBook(shared.getBookId()).enqueue(object : Callback<Book> {
             override fun onResponse(call: Call<Book>, response: Response<Book>) {
                 var body=response.body()
                 if (response.isSuccessful&& body!=null){

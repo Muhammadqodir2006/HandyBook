@@ -65,6 +65,10 @@ class MoreInfoFragmentFragment : Fragment() {
             }
         }.start()
 
+        binding.back.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         return binding.root
     }
     fun fetchBook(){

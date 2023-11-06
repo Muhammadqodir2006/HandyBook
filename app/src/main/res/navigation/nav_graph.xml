@@ -119,6 +119,9 @@
             app:destination="@id/moreInfoFragmentFragment"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_bookInfoFragment_to_readPdfFragment2"
+            app:destination="@id/readPdfFragment2" />
     </fragment>
     <fragment
         android:id="@+id/moreInfoFragmentFragment"
@@ -133,4 +136,9 @@
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
+    <fragment
+        android:id="@+id/readPdfFragment2"
+        android:name="uz.itschool.handybook.fragments.ReadPdfFragment"
+        android:label="fragment_read_pdf"
+        tools:layout="@layout/fragment_read_pdf" />
 </navigation>

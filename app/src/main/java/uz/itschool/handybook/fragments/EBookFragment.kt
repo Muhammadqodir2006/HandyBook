@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import uz.itschool.handybook.R
+import uz.itschool.handybook.databinding.FragmentEBookBinding
+import uz.itschool.handybook.databinding.FragmentReadPdfBinding
 import uz.itschool.handybook.networking.APIClient
 import uz.itschool.handybook.networking.APIService
 
@@ -21,6 +24,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class EBookFragment : Fragment() {
     private var param1: String? = null
+    private lateinit var binding: FragmentEBookBinding
     private val newsApi by lazy { APIClient.getInstance().create(APIService::class.java)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +38,14 @@ class EBookFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_e_book, container, false)
+        binding = FragmentEBookBinding.inflate(inflater, container, false)
+
+        binding.btnReadEbook.setOnClickListener {
+            findNavController().navigate(R.id.action_bookInfoFragment_to_readPdfFragment2)
+        }
+
+
+        return binding.root
     }
 
     companion object {

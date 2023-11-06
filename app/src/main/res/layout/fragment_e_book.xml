@@ -7,6 +7,7 @@
     tools:context=".fragments.EBookFragment">
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_read_ebook"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cornerRadius="14dp"

@@ -47,7 +47,7 @@ class MoreBooksFragment : Fragment() {
     ): View {
         binding = FragmentMoreBooksBinding.inflate(inflater, container, false)
 
-        setAdapter()
+        //setAdapter()
 
         return binding.root
     }

@@ -16,8 +16,8 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/back"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="start"
             android:background="@drawable/back_icon"
             app:backgroundTint="@color/black" />
@@ -30,12 +30,12 @@
             android:text="Batafsil"
             android:textColor="@color/black"
 
-            android:textSize="33dp" />
+            android:textSize="30sp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/book_mark"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="end"
             android:background="@drawable/bookmark_icon"
             app:backgroundTint="@color/black" />

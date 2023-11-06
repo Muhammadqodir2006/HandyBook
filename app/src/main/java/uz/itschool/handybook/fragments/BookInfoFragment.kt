@@ -44,6 +44,19 @@ class BookInfoFragment : Fragment() {
     ): View {
 
         _binding= FragmentBookInfoBinding.inflate(inflater,container,false)
+
+        setAdapters()
+
+        binding.imageView4.setOnClickListener {
+            findNavController().navigate(R.id.action_bookInfoFragment_to_moreInfoFragmentFragment)
+        }
+        binding.back.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        binding.tabLayoutInfo.setupWithViewPager(binding.l)
+        return binding.root
+    }
+    fun setAdapters(){
         fragmentAdapter.addFragment(EBookFragment(),"E-Book")
         fragmentAdapter.addFragment(AudioFragment(),"Audio Book")
         binding.tabLayoutBook.setupWithViewPager(binding.viewPager)
@@ -54,11 +67,6 @@ class BookInfoFragment : Fragment() {
         infoFragmentAdapter.addFragment(DescriptionFragment(),"Description")
         infoFragmentAdapter.addFragment(CommentsFragment(),"Coments")
         binding.l.adapter=infoFragmentAdapter
-        binding.imageView4.setOnClickListener {
-            findNavController().navigate(R.id.action_bookInfoFragment_to_moreInfoFragmentFragment)
-        }
-        binding.tabLayoutInfo.setupWithViewPager(binding.l)
-        return binding.root
     }
 
     companion object {
